@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>560</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>460</width>
+    <height>680</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>简易财务计算器</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="mainVerticalLayout">
+    <property name="spacing">
+     <number>12</number>
+    </property>
+    <property name="leftMargin">
+     <number>14</number>
+    </property>
+    <property name="topMargin">
+     <number>14</number>
+    </property>
+    <property name="rightMargin">
+     <number>14</number>
+    </property>
+    <property name="bottomMargin">
+     <number>14</number>
+    </property>
+
+    <!-- ==================== 显示区（同时也是拖拽落点） ==================== -->
+    <item>
+     <widget class="QGroupBox" name="displayGroup">
+      <property name="title">
+       <string>表达式 / 结果</string>
+      </property>
+      <layout class="QVBoxLayout" name="displayLayout">
+       <property name="spacing">
+        <number>8</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="hintLabel">
+         <property name="text">
+          <string>提示：可点击下方按钮输入，也可用鼠标把下方标签拖入输入框（回车计算 / Esc 清空）</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="exprEdit">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="placeholderText">
+          <string>在此输入表达式，例如 1000*(1+0.05)</string>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="resultRowLayout">
+         <item>
+          <widget class="QLabel" name="resultTagLabel">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>结果：</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="resultLabel">
+           <property name="text">
+            <string>0</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+
+    <!-- ==================== 拖拽输入区 ==================== -->
+    <item>
+     <widget class="QGroupBox" name="dragGroup">
+      <property name="title">
+       <string>拖拽输入区（按住标签拖到上方输入框松手）</string>
+      </property>
+      <layout class="QGridLayout" name="dragGridLayout">
+       <property name="spacing">
+        <number>8</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="DraggableLabel" name="lblDrag7">
+         <property name="text">
+          <string>7</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="DraggableLabel" name="lblDrag8">
+         <property name="text">
+          <string>8</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="DraggableLabel" name="lblDrag9">
+         <property name="text">
+          <string>9</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="DraggableLabel" name="lblDragDiv">
+         <property name="text">
+          <string>÷</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="DraggableLabel" name="lblDragLParen">
+         <property name="text">
+          <string>(</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="DraggableLabel" name="lblDrag4">
+         <property name="text">
+          <string>4</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="DraggableLabel" name="lblDrag5">
+         <property name="text">
+          <string>5</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="DraggableLabel" name="lblDrag6">
+         <property name="text">
+          <string>6</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="DraggableLabel" name="lblDragMul">
+         <property name="text">
+          <string>×</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="DraggableLabel" name="lblDragRParen">
+         <property name="text">
+          <string>)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="DraggableLabel" name="lblDrag1">
+         <property name="text">
+          <string>1</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="DraggableLabel" name="lblDrag2">
+         <property name="text">
+          <string>2</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="DraggableLabel" name="lblDrag3">
+         <property name="text">
+          <string>3</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="DraggableLabel" name="lblDragSub">
+         <property name="text">
+          <string>-</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="4">
+        <widget class="DraggableLabel" name="lblDragPlus">
+         <property name="text">
+          <string>+</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="DraggableLabel" name="lblDrag0">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="DraggableLabel" name="lblDragDot">
+         <property name="text">
+          <string>.</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2" colspan="3">
+        <spacer name="dragBottomSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+
+    <!-- ==================== 按钮输入区 ==================== -->
+    <item>
+     <widget class="QGroupBox" name="buttonGroup">
+      <property name="title">
+       <string>按键输入区</string>
+      </property>
+      <layout class="QGridLayout" name="buttonGridLayout">
+       <property name="spacing">
+        <number>8</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="btnNum7">
+         <property name="text">
+          <string>7</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="btnNum8">
+         <property name="text">
+          <string>8</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="btnNum9">
+         <property name="text">
+          <string>9</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QPushButton" name="btnClear">
+         <property name="text">
+          <string>C 清除</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="btnNum4">
+         <property name="text">
+          <string>4</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="btnNum5">
+         <property name="text">
+          <string>5</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QPushButton" name="btnNum6">
+         <property name="text">
+          <string>6</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QPushButton" name="btnBackspace">
+         <property name="text">
+          <string>← 退格</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="btnNum1">
+         <property name="text">
+          <string>1</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QPushButton" name="btnNum2">
+         <property name="text">
+          <string>2</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QPushButton" name="btnNum3">
+         <property name="text">
+          <string>3</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="QPushButton" name="btnLParen">
+         <property name="text">
+          <string>(</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QPushButton" name="btnNum0">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QPushButton" name="btnDot">
+         <property name="text">
+          <string>.</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QPushButton" name="btnEqual">
+         <property name="text">
+          <string>= 计算</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="3">
+        <widget class="QPushButton" name="btnRParen">
+         <property name="text">
+          <string>)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QPushButton" name="btnAdd">
+         <property name="text">
+          <string>+</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QPushButton" name="btnSub">
+         <property name="text">
+          <string>-</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QPushButton" name="btnMul">
+         <property name="text">
+          <string>×</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="3">
+        <widget class="QPushButton" name="btnDiv">
+         <property name="text">
+          <string>÷</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+
+    <!-- ==================== 财务计算区 ==================== -->
+    <item>
+     <widget class="QGroupBox" name="financeGroup">
+      <property name="title">
+       <string>财务计算</string>
+      </property>
+      <layout class="QVBoxLayout" name="financeLayout">
+       <property name="spacing">
+        <number>8</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="financeButtonLayout">
+         <item>
+          <widget class="QPushButton" name="btnFinanceSettings">
+           <property name="text">
+            <string>财务参数设置...</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnSimpleInterest">
+           <property name="text">
+            <string>单利计算</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnCompoundInterest">
+           <property name="text">
+            <string>复利计算</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="financeInfoLabel">
+         <property name="text">
+          <string>当前财务参数：年利率 3.00%  |  年限 5 年  |  计息方式：复利</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="financeTipLabel">
+         <property name="text">
+          <string>用法：先在上方输入本金（如 10000），再点"单利计算"或"复利计算"</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+
+   </layout>
+  </widget>
+
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>560</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+
+ <!-- 声明本 .ui 中使用的自定义控件：DraggableLabel（继承自 QLabel） -->
+ <customwidgets>
+  <customwidget>
+   <class>DraggableLabel</class>
+   <extends>QLabel</extends>
+   <header location="global">draggablelabel.h</header>
+  </customwidget>
+ </customwidgets>
+
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FinanceDialog</class>
+ <widget class="QDialog" name="FinanceDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>260</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>360</width>
+    <height>240</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>财务参数设置</string>
+  </property>
+
+  <layout class="QVBoxLayout" name="dialogMainLayout">
+   <property name="spacing">
+    <number>14</number>
+   </property>
+   <property name="leftMargin">
+    <number>16</number>
+   </property>
+   <property name="topMargin">
+    <number>16</number>
+   </property>
+   <property name="rightMargin">
+    <number>16</number>
+   </property>
+   <property name="bottomMargin">
+    <number>16</number>
+   </property>
+
+   <item>
+    <layout class="QFormLayout" name="formLayout">
+     <property name="labelAlignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="horizontalSpacing">
+      <number>12</number>
+     </property>
+     <property name="verticalSpacing">
+      <number>12</number>
+     </property>
+
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelRate">
+       <property name="text">
+        <string>年利率：</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QDoubleSpinBox" name="rateSpinBox">
+       <property name="suffix">
+        <string> %</string>
+       </property>
+       <property name="decimals">
+        <number>2</number>
+       </property>
+       <property name="minimum">
+        <double>0.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>100.000000000000000</double>
+       </property>
+       <property name="singleStep">
+        <double>0.250000000000000</double>
+       </property>
+       <property name="value">
+        <double>3.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+
+     <item row="1" column="0">
+      <widget class="QLabel" name="labelYears">
+       <property name="text">
+        <string>年限：</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QSpinBox" name="yearsSpinBox">
+       <property name="suffix">
+        <string> 年</string>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>100</number>
+       </property>
+       <property name="value">
+        <number>5</number>
+       </property>
+      </widget>
+     </item>
+
+     <item row="2" column="0">
+      <widget class="QLabel" name="labelMode">
+       <property name="text">
+        <string>计息方式：</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QComboBox" name="modeComboBox">
+       <item>
+        <property name="text">
+         <string>单利</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>复利</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+
+   <item>
+    <widget class="QLabel" name="tipLabel">
+     <property name="text">
+      <string>说明：单利 FV = P×(1+r×n)；复利 FV = P×(1+r)^n。参数会传回主窗口并显示在财务计算区。</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+
+   <item>
+    <spacer name="dialogVerticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>10</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+
+ <resources/>
+ <connections>
+  <!--
+    ★ 这里只保留"取消"按钮的连接；"确定"按钮的连接写在 src/financedialog.cpp 中 ★
+
+    原因：uic 会把本处的连接翻译成【函数指针】形式的 C++ 代码，例如
+              QObject::connect(buttonBox, &QDialogButtonBox::accepted,
+                               FinanceDialog, &QDialog::onAccepted);
+          而 setupUi() 的形参类型是 QDialog*，onAccepted() 却是我们加在
+          FinanceDialog 类上的自定义槽，QDialog 中并不存在这个成员，
+          于是编译期就报错：'onAccepted' is not a member of 'QDialog'。
+
+    放到 C++ 代码里用 this 连接，this 的真实类型就是 FinanceDialog，
+    类型匹配；同时还能享受编译期检查，这也是 Qt 6 推荐的做法。
+  -->
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>FinanceDialog</receiver>
+   <slot>reject()</slot>
+  </connection>
+ </connections>
+</ui>

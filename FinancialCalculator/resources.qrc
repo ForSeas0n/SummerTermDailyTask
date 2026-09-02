@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <!-- QSS 样式表：程序启动时由 main.cpp 读取并调用 qApp->setStyleSheet() -->
+        <file alias="style.qss">resources/style.qss</file>
+
+        <!-- 程序窗口图标（PNG 格式，由 QtGui 原生支持，无需 Qt SVG 模块） -->
+        <file alias="icons/calculator.png">resources/icons/calculator.png</file>
+
+        <!-- 功能按钮图标 -->
+        <file alias="icons/clear.png">resources/icons/clear.png</file>
+        <file alias="icons/backspace.png">resources/icons/backspace.png</file>
+        <file alias="icons/equal.png">resources/icons/equal.png</file>
+        <file alias="icons/finance.png">resources/icons/finance.png</file>
+
+        <!-- 主窗口右下角装饰背景图 -->
+        <file alias="icons/background.png">resources/icons/background.png</file>
+    </qresource>
+</RCC>

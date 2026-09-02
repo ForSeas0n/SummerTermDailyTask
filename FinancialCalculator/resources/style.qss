@@ -1,0 +1,212 @@
+/* =============================================================================
+ *  简易财务计算器 · QSS 样式表
+ *  说明：本文件通过 resources.qrc 打包进程序，由 main.cpp 在启动时读取并
+ *        调用 qApp->setStyleSheet() 全局应用。
+ * ========================================================================== */
+
+/* ---------- 全局字体与配色 ---------- */
+QWidget {
+    font-family: "Noto Sans CJK SC", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
+    font-size: 14px;
+    color: #2d3436;
+}
+
+QMainWindow,
+QDialog {
+    background-color: #eef2f7;
+}
+
+/* 中央部件背景图：来自 Qt 资源系统 :/icons/background.png */
+QWidget#centralwidget {
+    background-color: #eef2f7;
+    background-image: url(:/icons/background.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+}
+
+/* ---------- 分组框：圆角 + 蓝色标题 ---------- */
+QGroupBox {
+    background-color: #ffffff;
+    border: 1px solid #b2bec3;
+    border-radius: 10px;
+    margin-top: 16px;
+    padding: 12px 10px 10px 10px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    left: 14px;
+    padding: 0 8px;
+    color: #0984e3;
+    font-weight: bold;
+}
+
+/* ---------- 表达式输入框（也是拖拽落点） ---------- */
+QLineEdit#exprEdit {
+    background-color: #ffffff;
+    border: 2px solid #cbd5e0;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 20px;
+    selection-background-color: #74b9ff;
+    selection-color: #ffffff;
+}
+
+QLineEdit#exprEdit:hover {
+    border: 2px solid #74b9ff;
+}
+
+/* 获得焦点时高亮，给用户明确的"可以在这里输入"提示 */
+QLineEdit#exprEdit:focus {
+    border: 2px solid #0984e3;
+    background-color: #f7fbff;
+}
+
+/* ---------- 结果标签 ---------- */
+QLabel#resultLabel {
+    color: #0984e3;
+    font-size: 26px;
+    font-weight: bold;
+    padding: 2px 6px;
+}
+
+QLabel#resultTagLabel {
+    font-size: 16px;
+    color: #636e72;
+}
+
+QLabel#hintLabel,
+QLabel#financeTipLabel {
+    color: #8395a7;
+    font-size: 12px;
+}
+
+QLabel#financeInfoLabel {
+    color: #00b894;
+    font-weight: bold;
+    background-color: #f1fffa;
+    border: 1px dashed #00b894;
+    border-radius: 6px;
+    padding: 6px 10px;
+}
+
+/* ---------- 通用按钮：圆角 + 悬停变色 + 按下反馈 ---------- */
+QPushButton {
+    background-color: #ffffff;
+    border: 1px solid #dfe6e9;
+    border-radius: 10px;
+    padding: 10px 6px;
+    min-height: 30px;
+    font-size: 16px;
+}
+
+/* 悬停：淡蓝底 + 蓝边 */
+QPushButton:hover {
+    background-color: #d6eaf8;
+    border: 1px solid #74b9ff;
+}
+
+/* 按下：反白，形成明确的点击反馈 */
+QPushButton:pressed {
+    background-color: #0984e3;
+    color: #ffffff;
+    border: 1px solid #0984e3;
+}
+
+QPushButton:disabled {
+    background-color: #f1f2f6;
+    color: #b2bec3;
+}
+
+/* ---------- 特殊按钮 ---------- */
+
+/* 等号按钮：主色实心 */
+QPushButton#btnEqual {
+    background-color: #0984e3;
+    color: #ffffff;
+    font-weight: bold;
+}
+QPushButton#btnEqual:hover {
+    background-color: #0b9bf5;
+}
+QPushButton#btnEqual:pressed {
+    background-color: #0669b8;
+}
+
+/* 清除按钮：暖黄 */
+QPushButton#btnClear {
+    background-color: #ffeaa7;
+    color: #2d3436;
+}
+QPushButton#btnClear:hover {
+    background-color: #fdcb6e;
+}
+QPushButton#btnClear:pressed {
+    background-color: #e1a93c;
+    color: #ffffff;
+}
+
+/* 退格按钮：暖红 */
+QPushButton#btnBackspace {
+    background-color: #fab1a0;
+    color: #2d3436;
+}
+QPushButton#btnBackspace:hover {
+    background-color: #ff7675;
+    color: #ffffff;
+}
+QPushButton#btnBackspace:pressed {
+    background-color: #d63031;
+    color: #ffffff;
+}
+
+/* 财务相关按钮：绿色系 */
+QPushButton#btnFinanceSettings,
+QPushButton#btnSimpleInterest,
+QPushButton#btnCompoundInterest {
+    background-color: #55efc4;
+    color: #2d3436;
+    font-weight: bold;
+}
+QPushButton#btnFinanceSettings:hover,
+QPushButton#btnSimpleInterest:hover,
+QPushButton#btnCompoundInterest:hover {
+    background-color: #00b894;
+    color: #ffffff;
+}
+QPushButton#btnFinanceSettings:pressed,
+QPushButton#btnSimpleInterest:pressed,
+QPushButton#btnCompoundInterest:pressed {
+    background-color: #00997a;
+    color: #ffffff;
+}
+
+/* ---------- 可拖拽标签（自定义控件 DraggableLabel） ---------- */
+/* 用类名作为选择器，Qt 会按 QObject::metaObject()->className() 匹配 */
+DraggableLabel {
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                     stop: 0 #ffffff, stop: 1 #e8f1fb);
+    color: #0984e3;
+    border: 1px solid #74b9ff;
+    border-radius: 10px;
+    padding: 10px 4px;
+    font-size: 20px;
+    font-weight: bold;
+    min-height: 30px;
+    qproperty-alignment: AlignCenter;
+}
+
+/* 悬停：整块反色，提示"这个可以抓" */
+DraggableLabel:hover {
+    background-color: #0984e3;
+    color: #ffffff;
+    border: 1px solid #0669b8;
+}
+
+/* ---------- 状态栏与滚动条 ---------- */
+QStatusBar {
+    background-color: #dfe6e9;
+    color: #2d3436;
+    border-top: 1px solid #b2bec3;
+}
