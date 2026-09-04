@@ -1,0 +1,133 @@
+/* ============================================================================
+   Socket 文件传输工具 · QSS 样式表
+   说明：
+   - 通过 resources.qrc 以 :/style.qss 载入，main.cpp 中 qApp->setStyleSheet 应用；
+   - 覆盖按钮、进度条、日志区、拖拽区，实现悬停变色、圆角、拖拽高亮。
+   ============================================================================ */
+
+/* ---------- 全局字体 ---------- */
+QWidget {
+    font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    font-size: 13px;
+}
+
+QMainWindow, QDialog {
+    background-color: #f4f6f8;
+}
+
+/* ---------- 分组框 ---------- */
+QGroupBox {
+    border: 1px solid #d5dbe0;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding: 10px 8px 8px 8px;
+    background-color: #ffffff;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 12px;
+    padding: 0 4px;
+    color: #455a64;
+    font-weight: bold;
+}
+
+/* ---------- 按钮 ---------- */
+QPushButton {
+    background-color: #ffffff;
+    border: 1px solid #b0bec5;
+    border-radius: 6px;
+    padding: 7px 18px;
+    color: #37474f;
+}
+QPushButton:hover {
+    background-color: #e3f2fd;
+    border-color: #2196f3;
+    color: #1565c0;
+}
+QPushButton:pressed {
+    background-color: #bbdefb;
+}
+QPushButton:disabled {
+    background-color: #eceff1;
+    color: #90a4ae;
+    border-color: #cfd8dc;
+}
+
+/* 主操作按钮（监听/连接/断开）醒目一点 */
+QPushButton#actionButton {
+    background-color: #2196f3;
+    border: 1px solid #1976d2;
+    color: #ffffff;
+    font-weight: bold;
+}
+QPushButton#actionButton:hover {
+    background-color: #42a5f5;
+}
+QPushButton#actionButton:pressed {
+    background-color: #1976d2;
+}
+
+/* ---------- 输入框 / 数字框 ---------- */
+QLineEdit, QSpinBox {
+    border: 1px solid #cfd8dc;
+    border-radius: 5px;
+    padding: 6px 8px;
+    background-color: #ffffff;
+}
+QLineEdit:focus, QSpinBox:focus {
+    border-color: #2196f3;
+}
+
+/* ---------- 进度条 ---------- */
+QProgressBar {
+    border: 1px solid #cfd8dc;
+    border-radius: 6px;
+    background-color: #eceff1;
+    text-align: center;
+    color: #37474f;
+    height: 18px;
+}
+QProgressBar::chunk {
+    border-radius: 5px;
+    background-color: #4caf50;
+}
+
+/* ---------- 日志区 ---------- */
+QTextEdit {
+    border: 1px solid #cfd8dc;
+    border-radius: 8px;
+    background-color: #ffffff;   /* 白底 */
+    color: #212121;              /* 黑字，默认信息色 */
+    padding: 8px;
+    font-family: "Consolas", "Menlo", monospace;
+    font-size: 13px;
+    selection-background-color: #bbdefb;
+}
+
+/* ---------- 拖拽接收区 ----------
+   平时：白色 + 虚线圆角边框；
+   拖入高亮（dragHover=true 时）：浅蓝底 + 实线高亮边框。 */
+QWidget#dropZone {
+    background-color: #ffffff;
+    border: 2px dashed #b0bec5;
+    border-radius: 10px;
+    color: #90a4ae;
+}
+QWidget#dropZone[dragHover="true"] {
+    background-color: #e3f2fd;
+    border: 2px solid #2196f3;
+    color: #1565c0;
+}
+
+/* ---------- 保存位置提示 / 说明文字 ---------- */
+QLabel#savePathLabel, QLabel#hintLabel {
+    color: #546e7a;
+    font-size: 12px;
+    padding: 2px 4px;
+}
+
+/* ---------- 状态栏 ---------- */
+QStatusBar {
+    background-color: #eceff1;
+    color: #455a64;
+}

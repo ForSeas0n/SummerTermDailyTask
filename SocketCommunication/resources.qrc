@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <!-- QSS 样式表：程序启动时由 main.cpp 读取并调用 qApp->setStyleSheet() -->
+        <file alias="style.qss">resources/style.qss</file>
+
+        <!-- 程序窗口图标（PNG 格式，由 QtGui 原生支持，无需 Qt SVG 模块） -->
+        <file alias="icons/app.png">resources/icons/app.png</file>
+
+        <!-- 功能按钮 / 状态图标 -->
+        <file alias="icons/connect.png">resources/icons/connect.png</file>
+        <file alias="icons/disconnect.png">resources/icons/disconnect.png</file>
+        <file alias="icons/listen.png">resources/icons/listen.png</file>
+        <file alias="icons/send.png">resources/icons/send.png</file>
+        <file alias="icons/open.png">resources/icons/open.png</file>
+        <file alias="icons/settings.png">resources/icons/settings.png</file>
+    </qresource>
+</RCC>
